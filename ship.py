@@ -18,22 +18,22 @@ class Ship:
         self.movingRight = False
         self.movingLeft = False
         self.settings = settings
-        self.bullets = []
+        self.center = float(self.rect.centerx)
 
     def draw(self):
         """Render the ship on the screen"""
         self.screen.blit(self.image, self.rect)
-        for bullet in self.bullets:
-            bullet.draw()
+
 
     def moveLeft(self):
-
-        self.rect.centerx = self.rect.centerx - self.settings.ship_speed
+        self.center = float(self.center) - self.settings.ship_speed
+        self.rect.centerx = self.center
         if self.rect.left < self.screen_rect.left:
             self.rect.left = self.screen_rect.left
 
     def moveRight(self):
-        self.rect.centerx = self.rect.centerx + self.settings.ship_speed
+        self.center = float(self.center) + self.settings.ship_speed
+        self.rect.centerx = self.center
         if self.rect.right > self.screen_rect.right:
             self.rect.right = self.screen_rect.right
 
@@ -44,10 +44,9 @@ class Ship:
         elif self.movingRight:
             self.moveRight()
 
-        for bullet in self.bullets:
-            bullet.update()
 
-    def fire(self):
+
+    def fire(self,bullets):
         top_center_x = self.rect.left + int(self.rect.width / 2)
         top_center_y = self.rect.top
-        self.bullets.append(Bullet(self.screen, self.settings, (top_center_x, top_center_y)))
+        bullets.append(Bullet(self.screen, self.settings, (top_center_x, top_center_y)))

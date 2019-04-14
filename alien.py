@@ -14,6 +14,7 @@ class Alien:
         self.rect.top = self.screen_rect.top
         self.settings = settings
         self.alive = True
+        self.center = float(self.rect.centery)
 
     def draw(self):
         """Render the alien on the screen"""
@@ -21,7 +22,8 @@ class Alien:
             self.screen.blit(self.image, self.rect)
 
     def move_down(self):
-        self.rect.centery += self.settings.alien_speed
+        self.center = self.center + self.settings.alien_speed
+        self.rect.centery = self.center
         if self.rect.bottom >= self.screen_rect.bottom:
             self.alive = False
 
