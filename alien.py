@@ -4,6 +4,7 @@ import pygame
 class Alien:
 
     def __init__(self, screen, settings, spawn_position):
+        self.touch_down = False
         self.screen = screen
 
         self.image = pygame.image.load("images/alien.bmp")
@@ -26,9 +27,13 @@ class Alien:
         self.rect.centery = self.center
         if self.rect.bottom >= self.screen_rect.bottom:
             self.alive = False
+            self.touch_down = True
 
     def update(self):
         self.move_down()
 
     def die(self):
         self.alive = False
+
+    def get_touch_down(self):
+        return self.touch_down

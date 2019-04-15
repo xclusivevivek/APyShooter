@@ -23,11 +23,10 @@ def run_game():
         for bullet in bullets:
             bullet.update()
 
+        gameF.update_screen(settings, screen, ship, enemy,bullets)
         bullet_copy = bullets[:]
         for bullet in bullet_copy:
             if not bullet.alive:
                 bullets.remove(bullet)
-        gameF.update_screen(settings, screen, ship, enemy,bullets)
-
 
 run_game()

@@ -9,3 +9,4 @@ class Setting():
         self.ship_speed = 2
         self.alien_speed = 0.5
         self.bullet_speed = 0.6
+        self.max_lives = 3

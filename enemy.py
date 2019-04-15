@@ -23,13 +23,14 @@ class Enemy:
         return random.randrange(0, self.settings.screen_width, 100)
 
     def update(self):
+        alien_copy = self.aliens[:]
+        for alien in alien_copy:
+            if not alien.alive:
+                self.aliens.remove(alien)
         for alien in self.aliens:
             alien.move_down()
 
-        alien_copy = self.aliens[:]
-        for alien in alien_copy:
-            if not alien.alive :
-                self.aliens.remove(alien)
+
 
     def draw(self):
         for alien in self.aliens:
@@ -45,11 +46,21 @@ class Enemy:
         return count
 
     def hit(self, bullet_pos):
-        is_hit=False
+        hit_count=0
         for alien in self.aliens:
             if alien.alive:
                 if alien.rect.colliderect(bullet_pos):
                     alien.die()
-                    is_hit = True
-                    return is_hit
-        return is_hit
+                    hit_count += 1
+
+        return hit_count
+
+    def touch_down(self):
+        for alien in self.aliens:
+            if alien.get_touch_down():
+                return True
+        return False
+
+    def kill_all(self):
+        for alien in self.aliens:
+            alien.alive=False

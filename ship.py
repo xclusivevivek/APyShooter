@@ -7,6 +7,7 @@ class Ship:
     """The Ship to defend all"""
 
     def __init__(self, screen, settings):
+        self.score = 0
         self.screen = screen
 
         self.image = pygame.image.load("images/ship.bmp")
@@ -19,11 +20,12 @@ class Ship:
         self.movingLeft = False
         self.settings = settings
         self.center = float(self.rect.centerx)
+        self.lives = settings.max_lives
+
 
     def draw(self):
         """Render the ship on the screen"""
         self.screen.blit(self.image, self.rect)
-
 
     def moveLeft(self):
         self.center = float(self.center) - self.settings.ship_speed
@@ -44,9 +46,19 @@ class Ship:
         elif self.movingRight:
             self.moveRight()
 
-
-
-    def fire(self,bullets):
+    def fire(self, bullets):
         top_center_x = self.rect.left + int(self.rect.width / 2)
         top_center_y = self.rect.top
         bullets.append(Bullet(self.screen, self.settings, (top_center_x, top_center_y)))
+
+    def reduce_live(self):
+        self.lives -= 1
+
+    def get_score(self):
+        return self.score
+
+    def add_score(self,hit_count):
+        self.score += hit_count
+
+    def no_lives(self):
+        return self.lives == 0

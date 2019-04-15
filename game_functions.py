@@ -2,11 +2,23 @@ import pygame
 import sys
 
 
-def hit_aliens(enemy, bullets):
+def hit_aliens(enemy, bullets, ship):
     for bullet in bullets:
         if bullet.alive:
-            if enemy.hit(bullet.rect):
+            hit_count = enemy.hit(bullet.rect)
+            if hit_count > 0:
                 bullet.alive = False
+                ship.add_score(hit_count)
+
+
+def check_touchdown(enemy, ship):
+    if enemy.touch_down():
+        ship.reduce_live()
+        enemy.kill_all()
+
+    if ship.no_lives():
+        print("Game over:Score " + str(ship.get_score()))
+        sys.exit()
 
 
 def check_event(ship, enemy, bullets):
@@ -27,11 +39,13 @@ def check_event(ship, enemy, bullets):
                 ship.fire(bullets)
 
     # check for collosion
-    hit_aliens(enemy, bullets)
+    hit_aliens(enemy, bullets, ship)
 
+    # check for aliens touchdown
+    check_touchdown(enemy, ship)
     # check for spawning enemy
     if enemy.get_alien_alive_count() == 0:
-            enemy.spawn_aliens()
+        enemy.spawn_aliens()
 
 
 def update_screen(setting, screen, ship, enemy, bullets):
