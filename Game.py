@@ -6,7 +6,7 @@ from enemy import Enemy
 from ship import Ship
 
 
-def reset_game(ship, enemy, bullets, screen, settings):
+def reset_game(screen, settings):
     ship = Ship(screen, settings)
     enemy = Enemy(screen, settings)
     bullets = []
@@ -29,7 +29,7 @@ def run_game():
     while True:
         restart = gameF.check_event(ship, enemy, bullets)
         if restart:
-            (ship, enemy, bullets) = reset_game(ship, enemy, bullets, screen, settings)
+            (ship, enemy, bullets) = reset_game( screen, settings)
         if not ship.no_lives():
             ship.update()
             enemy.update()

@@ -7,7 +7,7 @@ class Setting():
         self.screen_height = 600
         self.bg_color = (230, 230, 230)  # Green
         self.ship_speed = 2
-        self.alien_speed = 0.5
+        self.alien_speed = 0.8
         self.bullet_speed = 0.6
         self.max_lives = 3
         self.score_font = 'freesansbold.ttf'

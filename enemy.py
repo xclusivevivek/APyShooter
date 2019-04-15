@@ -17,10 +17,10 @@ class Enemy:
         self.alive_alien_count += alien_count
 
         for alien_index in range(1, alien_count):
-            self.aliens.append(Alien(self.screen, self.settings, self.get_alien_position()))
+            self.aliens.append(Alien(self.screen, self.settings, self.get_alien_position(), self.get_alien_speed()))
 
     def get_alien_position(self):
-        return random.randrange(0, self.settings.screen_width, 100)
+        return random.randrange(0, self.settings.screen_width, 50)
 
     def update(self):
         alien_copy = self.aliens[:]
@@ -62,3 +62,6 @@ class Enemy:
     def kill_all(self):
         for alien in self.aliens:
             alien.alive = False
+
+    def get_alien_speed(self):
+        return random.uniform(0.5, self.settings.alien_speed)

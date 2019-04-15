@@ -3,7 +3,7 @@ import pygame
 
 class Alien:
 
-    def __init__(self, screen, settings, spawn_position):
+    def __init__(self, screen, settings, spawn_position, speed):
         self.touch_down = False
         self.screen = screen
 
@@ -16,6 +16,7 @@ class Alien:
         self.settings = settings
         self.alive = True
         self.center = float(self.rect.centery)
+        self.speed = speed
 
     def draw(self):
         """Render the alien on the screen"""
@@ -23,7 +24,7 @@ class Alien:
             self.screen.blit(self.image, self.rect)
 
     def move_down(self):
-        self.center = self.center + self.settings.alien_speed
+        self.center = self.center + self.speed
         self.rect.centery = self.center
         if self.rect.bottom >= self.screen_rect.bottom:
             self.alive = False
