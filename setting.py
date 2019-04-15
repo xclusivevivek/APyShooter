@@ -10,3 +10,5 @@ class Setting():
         self.alien_speed = 0.5
         self.bullet_speed = 0.6
         self.max_lives = 3
+        self.score_font = 'freesansbold.ttf'
+        self.score_size = 18

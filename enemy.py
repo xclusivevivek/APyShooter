@@ -30,8 +30,6 @@ class Enemy:
         for alien in self.aliens:
             alien.move_down()
 
-
-
     def draw(self):
         for alien in self.aliens:
             alien.draw()
@@ -40,13 +38,13 @@ class Enemy:
         count = 0
         for alien in self.aliens:
             if alien.alive:
-                count=count + 1
+                count = count + 1
 
         self.alive_alien_count = count
         return count
 
     def hit(self, bullet_pos):
-        hit_count=0
+        hit_count = 0
         for alien in self.aliens:
             if alien.alive:
                 if alien.rect.colliderect(bullet_pos):
@@ -63,4 +61,4 @@ class Enemy:
 
     def kill_all(self):
         for alien in self.aliens:
-            alien.alive=False
+            alien.alive = False

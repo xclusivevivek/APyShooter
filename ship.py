@@ -22,7 +22,6 @@ class Ship:
         self.center = float(self.rect.centerx)
         self.lives = settings.max_lives
 
-
     def draw(self):
         """Render the ship on the screen"""
         self.screen.blit(self.image, self.rect)
@@ -57,8 +56,11 @@ class Ship:
     def get_score(self):
         return self.score
 
-    def add_score(self,hit_count):
+    def add_score(self, hit_count):
         self.score += hit_count
 
     def no_lives(self):
         return self.lives == 0
+
+    def get_lives(self):
+        return self.lives
